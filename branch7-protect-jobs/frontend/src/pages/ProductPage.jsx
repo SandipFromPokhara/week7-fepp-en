@@ -13,7 +13,7 @@ const ProductPage = ({ isAuthenticated }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user ? user.token : null;
 
-  const deleteProduct = async (productId) => {
+  const deleteProduct = async (id) => {
     if (!isAuthenticated || !token) {
         console.error("User is not authenticated or token is missing.");
         alert("You must be logged in to delete products.");
@@ -21,7 +21,7 @@ const ProductPage = ({ isAuthenticated }) => {
     }
 
     try {
-      const res = await fetch(`/api/products/${productId}`, {
+      const res = await fetch(`/api/products/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,17 +57,17 @@ const ProductPage = ({ isAuthenticated }) => {
     fetchProduct();
   }, [productId]);
 
-  const onDeleteClick = (productId) => {
+  const onDeleteClick = (id) => {
     const confirm = window.confirm(
-      "Are you sure you want to delete this listing? productId: " + productId
+      "Are you sure you want to delete this listing? ID: " + id
     );
     if (!confirm) return;
 
-    deleteProduct(productId);
+    deleteProduct(id);
   };
 
   return (
-    <div className="product-preview">
+    <div className="product-page">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -87,8 +87,8 @@ const ProductPage = ({ isAuthenticated }) => {
           {/* Renders only if the 'isAuthenticated' prop is true */}
           {isAuthenticated && (
             <>
-              <button onClick={() => onDeleteClick(product._productId)}>Delete</button>
-              <button onClick={() => navigate(`/edit-product/${product._productId}`)}>
+              <button onClick={() => onDeleteClick(product._id)}>delete</button>
+              <button onClick={() => navigate(`/edit-product/${product._id}`)}>
                 edit
               </button>
             </>

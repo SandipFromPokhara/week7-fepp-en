@@ -5,7 +5,7 @@ const EditJobPage = () => {
   const [job, setJob] = useState(null); // Initialize job state
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
-  const { id } = useParams();
+  const { productId } = useParams();
 
   // Declare state variables for form fields
   const [title, setTitle] = useState("");
@@ -23,7 +23,7 @@ const EditJobPage = () => {
   const updateJob = async (job) => {
     try {
       console.log("Updating job:", job);
-      const res = await fetch(`/api/jobs/${job.id}`, {
+      const res = await fetch(`/api/jobs/${job.productId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const EditJobPage = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`/api/jobs/${id}`);
+        const res = await fetch(`/api/jobs/${productId}`);
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
@@ -66,14 +66,14 @@ const EditJobPage = () => {
     };
 
     fetchJob();
-  }, [id]);
+  }, [productId]);
 
   // Handle form submission
   const submitForm = async (e) => {
     e.preventDefault();
 
     const updatedJob = {
-      id,
+      productId,
       title,
       type,
       description,
@@ -87,7 +87,7 @@ const EditJobPage = () => {
     const success = await updateJob(updatedJob);
     if (success) {
       console.log("Job Updated Successfully");
-      navigate(`/jobs/${id}`);
+      navigate(`/jobs/${productId}`);
     } else {
       console.error("Failed to update the job");
     }

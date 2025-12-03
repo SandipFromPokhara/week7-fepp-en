@@ -28,7 +28,7 @@ const Login = ({ setIsAuthenticated }) => {
         <input {...email} />
         <label>Password:</label>
         <input {...password} />
-        <button>Sign up</button>
+        <button>Log In</button>
       </form>
     </div>
   );

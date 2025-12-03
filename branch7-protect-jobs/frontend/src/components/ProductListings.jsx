@@ -7,9 +7,9 @@ const ProductListings = ({ products }) => {
 
         <div className="product-preview" key={product.id}>
           <Link to={`/products/${product.id}`}>
-            <h2>{product.title}</h2>
+            <h2 style={{ marginBottom: 10 }}>{product.title}</h2>
           </Link>
-          <p>Category: {product.category}</p>
+          <p style={{ marginBottom: 4 }}>Category: {product.category}</p>
           <p>Supplier: {product.supplier.name}</p>
         </div>
       ))}

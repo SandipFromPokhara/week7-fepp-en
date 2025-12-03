@@ -27,7 +27,7 @@ const Login = () => {
         <input {...email} />
         <label>Password:</label>
         <input {...password} />
-        <button>Sign up</button>
+        <button>Log in</button>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const JobListings = ({ jobs }) => {
+const JobListings = ({ jobs = [] }) => {
   return (
     <div className="job-list">
       {jobs.map((job) => (

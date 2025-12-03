@@ -1,37 +1,35 @@
-import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState } from "react";
+
+// pages & components
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
-import JobsPage from "./pages/JobsPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import JobPage from "./pages/JobPage"; 
+import Home from "./pages/HomePage";
 import AddJobPage from "./pages/AddJobPage";
+import JobPage from "./pages/JobPage";
 import EditJobPage from "./pages/EditJobPage";
-import Login from ("./pages/LoginPage");
-import Signup from ("./pages/SignUp");
+import NotFoundPage from "./pages/NotFoundPage";
+import Login from "./pages/LoginPage";
+import Signup from "./pages/Signup";
 
 const App = () => {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="/jobs" element={<JobsPage />} />
-        <Route path="/add-job" element={<AddJobPage />} />
-        <Route path="/edit-job/:id" element={<EditJobPage />} />
-        <Route path="/jobs/:id" element={<JobPage />} />
-        <Route path="/signup" element={<JobPage />} />
-        <Route path="/login" element={<JobPage />} />
-
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    )
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/jobs/:id" element={<JobPage />} />
+            <Route path="/jobs/add-job" element={<AddJobPage />} />
+            <Route path="/edit-job/:id" element={<EditJobPage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
   );
-
-  return <RouterProvider router={router} />;
 };
 
 export default App;

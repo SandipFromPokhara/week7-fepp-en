@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const validator = require("validator");
 
 // Generate JWT
 const generateToken = (_id) => {
@@ -40,10 +41,18 @@ const signupUser = async (req, res) => {
       throw new Error("User already exists");
     }
 
-    if (role !== admin || seller || buyer) {
+    if (!validator.isAlpha(name)) throw new Error("Invalid name");
+    if (!validator.isEmail(email)) throw new Error("Invalid email format");
+    if (!validator.isStrongPassword(password)) throw new Error("Password is not strong enough!");
+
+    const validRoles = ['Admin', 'Seller', 'Buyer'];
+    if (!validRoles.includes(role)) {
       res.status(400);
-      throw new Error("Invalid user role.")
+      throw new Error("Invalid user role.");
     }
+
+    const validAdd = /^[a-zA-Z0-9\s,.'/ -]+$/;
+    if (!validAdd.test(address)) throw new Error("Invalid address format");
 
     // Hash password
     const salt = await bcrypt.genSalt(10);
@@ -81,6 +90,9 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+      user.lastLogin = Date.now();
+      await user.save();
+      
       const token = generateToken(user._id);
       res.status(200).json({ email, token });
     } else {

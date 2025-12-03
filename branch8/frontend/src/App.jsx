@@ -25,38 +25,11 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/products/:productId"
-              element={<ProductPage isAuthenticated={isAuthenticated} />}
-            />
-            <Route
-              path="/products/add-product"
-              element={isAuthenticated ? <AddProductPage /> : <Navigate to="/signup" />}
-            />
-            <Route
-              path="/edit-product/:productId"
-              element={isAuthenticated ? <EditProductPage /> : <Navigate to="/signup" />}
-            />
-            <Route
-              path="/signup"
-              element={
-                isAuthenticated ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Signup setIsAuthenticated={setIsAuthenticated} />
-                )
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                isAuthenticated ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Login setIsAuthenticated={setIsAuthenticated} />
-                )
-              }
-            />
+            <Route path="/products/:productId" element={<ProductPage isAuthenticated={isAuthenticated} />} />
+            <Route path="/products/add-product" element={isAuthenticated ? <AddProductPage /> : <Navigate to="/signup" />} />
+            <Route path="/edit-product/:productId" element={isAuthenticated ? <EditProductPage /> : <Navigate to="/signup" />} />
+            <Route path="/signup" element={ isAuthenticated ? (<Navigate to="/" />) : (<Signup setIsAuthenticated={setIsAuthenticated} />) }/>
+            <Route path="/login" element={ isAuthenticated ? (<Navigate to="/" />) : (<Login setIsAuthenticated={setIsAuthenticated} />) } />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

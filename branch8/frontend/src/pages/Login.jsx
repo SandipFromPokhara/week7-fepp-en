@@ -19,7 +19,6 @@ const Login = ({ setIsAuthenticated }) => {
     }
   };
 
-
   return (
     <div className="create">
       <h2>Login</h2>
@@ -28,7 +27,7 @@ const Login = ({ setIsAuthenticated }) => {
         <input {...email} />
         <label>Password:</label>
         <input {...password} />
-        <button>Sign up</button>
+        <button>LogIn</button>
       </form>
     </div>
   );

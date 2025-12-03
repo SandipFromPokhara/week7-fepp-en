@@ -10,7 +10,6 @@ const Signup = ({ setIsAuthenticated }) => {
   const role = useField("role");
   const address = useField("address");
 
-
   const { signup, error } = useSignup("/api/users/signup");
 
   const handleFormSubmit = async (e) => {

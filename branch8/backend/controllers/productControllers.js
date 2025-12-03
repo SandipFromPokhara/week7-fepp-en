@@ -57,6 +57,10 @@ const updateProduct = async (req, res) => {
         { ...req.body },
         { new: true }
       );
+
+       if (!updatedProduct) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
       if (updatedProduct) {
         res.status(200).json(updatedProduct);
       } else {

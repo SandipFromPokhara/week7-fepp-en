@@ -87,7 +87,7 @@ const ProductPage = ({ isAuthenticated }) => {
           {/* Renders only if the 'isAuthenticated' prop is true */}
           {isAuthenticated && (
             <>
-              <button onClick={() => onDeleteClick(product._id)}>delete</button>
+              <button onClick={() => onDeleteClick(product._id)}>Delete</button>
               <button onClick={() => navigate(`/edit-product/${product._id}`)}>
                 edit
               </button>
